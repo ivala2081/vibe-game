@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "vibe-games",
+  "description": "Indie game-dev plugins for Claude Code. Starting with Vibe Game for Unity.",
+  "owner": {
+    "name": "Donchitos"
+  },
+  "plugins": [
+    {
+      "name": "vibe-game",
+      "source": "./",
+      "displayName": "Vibe Game for Unity",
+      "description": "Ship indie Unity games solo, fast. Encoded design taste from Vlambeer, Steve Swink, Tyroller, GMTK, cited in every skill output.",
+      "version": "0.2.3",
+      "author": {
+        "name": "Donchitos"
+      },
+      "homepage": "https://github.com/Donchitos/vibe-game",
+      "repository": "https://github.com/Donchitos/vibe-game",
+      "license": "MIT",
+      "category": "development",
+      "keywords": ["unity", "game-dev", "indie", "game-feel", "juice", "vibe-coding"],
+      "tags": ["unity", "indie", "game-feel"]
+    }
+  ]
+}

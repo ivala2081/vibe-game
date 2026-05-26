@@ -1,0 +1,24 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "vibe-game",
+  "displayName": "Vibe Game for Unity",
+  "version": "0.2.3",
+  "description": "Ship indie Unity games solo, fast. Encoded design taste from Vlambeer, Steve Swink, Jonas Tyroller, and GMTK, cited in every skill output. Unity-only. Not affiliated with Unity Technologies.",
+  "author": {
+    "name": "Donchitos"
+  },
+  "homepage": "https://github.com/Donchitos/vibe-game",
+  "repository": "https://github.com/Donchitos/vibe-game",
+  "license": "MIT",
+  "keywords": [
+    "unity",
+    "game-dev",
+    "indie",
+    "game-feel",
+    "juice",
+    "vibe-coding",
+    "vlambeer",
+    "game-design"
+  ],
+  "category": "development"
+}

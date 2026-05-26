@@ -1,0 +1,31 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs / temp
+*.log
+*.tmp
+
+# Build artifacts (the Unity example doesn't ship a build)
+Builds/
+Library/
+Temp/
+Obj/
+Logs/
+UserSettings/
+
+# Claude Code local
+.claude/local/
+
+# Demo project Unity files (Cleave-Demo lives outside this repo)
+**/Library/
+**/Temp/
+**/Obj/
