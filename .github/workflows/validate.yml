@@ -1,0 +1,101 @@
+name: Validate plugin
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-json:
+    name: Validate JSON manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate plugin.json is valid JSON
+        run: |
+          jq -e . .claude-plugin/plugin.json > /dev/null
+          echo "✓ plugin.json is valid JSON"
+
+      - name: Validate marketplace.json is valid JSON
+        run: |
+          jq -e . .claude-plugin/marketplace.json > /dev/null
+          echo "✓ marketplace.json is valid JSON"
+
+      - name: Validate hooks/hooks.json is valid JSON
+        run: |
+          jq -e . hooks/hooks.json > /dev/null
+          echo "✓ hooks.json is valid JSON"
+
+      - name: Check required fields in plugin.json
+        run: |
+          for field in name version description; do
+            jq -e ".$field" .claude-plugin/plugin.json > /dev/null \
+              || { echo "✗ plugin.json missing required field: $field"; exit 1; }
+          done
+          echo "✓ plugin.json has all required fields"
+
+      - name: Check marketplace.json plugin entry references vibe-game
+        run: |
+          jq -e '.plugins[] | select(.name == "vibe-game")' .claude-plugin/marketplace.json > /dev/null \
+            || { echo "✗ marketplace.json missing vibe-game plugin entry"; exit 1; }
+          echo "✓ marketplace.json references vibe-game"
+
+      - name: Version consistency check
+        run: |
+          PLUGIN_VER=$(jq -r '.version' .claude-plugin/plugin.json)
+          MARKET_VER=$(jq -r '.plugins[] | select(.name == "vibe-game") | .version' .claude-plugin/marketplace.json)
+          if [ "$PLUGIN_VER" != "$MARKET_VER" ]; then
+            echo "✗ Version mismatch: plugin.json=$PLUGIN_VER, marketplace.json=$MARKET_VER"
+            exit 1
+          fi
+          echo "✓ Versions match: $PLUGIN_VER"
+
+  validate-skills:
+    name: Validate SKILL.md frontmatter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check each SKILL.md has required frontmatter
+        run: |
+          fail=0
+          for f in skills/*/SKILL.md; do
+            if ! head -10 "$f" | grep -q "^description:"; then
+              echo "✗ $f missing 'description' in frontmatter"
+              fail=1
+            fi
+            if ! head -10 "$f" | grep -q "^name:"; then
+              echo "✗ $f missing 'name' in frontmatter"
+              fail=1
+            fi
+          done
+          if [ $fail -eq 0 ]; then echo "✓ All SKILL.md files have required frontmatter"; fi
+          exit $fail
+
+      - name: Check taste citations exist in skills
+        run: |
+          # Every skill should reference at least one taste source
+          fail=0
+          for f in skills/*/SKILL.md; do
+            if ! grep -qE 'taste/.+\.md|Vlambeer P[0-9]+|Game Feel|Tyroller M[0-9]+|GMTK' "$f"; then
+              echo "⚠ $f does not cite a taste source (Vlambeer, Game Feel, Tyroller, GMTK)"
+              fail=1
+            fi
+          done
+          if [ $fail -eq 0 ]; then echo "✓ All skills cite a taste source"; fi
+          # Warning only, not blocking
+          exit 0
+
+  shellcheck-hooks:
+    name: Shellcheck hook scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run shellcheck
+        run: |
+          sudo apt-get install -y shellcheck
+          shellcheck hooks/*.sh
+          echo "✓ Hook scripts pass shellcheck"

@@ -7,6 +7,42 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [0.3.0] — 2026-05-26
+
+### Added
+- **3 new skills** filling the v2 promise gap from v0.2:
+  - `/jam-mode` — Game jam workflow with locked scope, auto-checkpoints, CC0-only assets,
+    auto-devlog cadence, and a hard ship gate at T-2h.
+  - `/devlog` — Generate GMTK-style devlog posts in three lengths (Twitter, itch.io, blog)
+    with GIF placement guidance. Mood-aware tone calibration.
+  - `/death-watch` — Honest project health diagnostic. Tracks activity, scope drift,
+    playtest cadence, and "it'll be fun when..." excuse count. Outputs four paths:
+    PIVOT / SHIP / CUT-AND-CONTINUE / ABANDON.
+- **`CONTRIBUTING.md`** — moat-aware contribution guidelines. High-value PRs (taste sources,
+  demos, dogfood reports) vs low-value (generic tips, engine ports).
+- **GitHub Actions CI** at `.github/workflows/validate.yml`:
+  - JSON validity for plugin.json, marketplace.json, hooks/hooks.json
+  - Required field check for plugin.json
+  - Version consistency check between plugin.json and marketplace.json
+  - SKILL.md frontmatter linting (required `name`, `description`)
+  - Shellcheck on hook scripts
+- **`RECORDING-GUIDE.md`** in `examples/demo-1-cleave/` — step-by-step Unity Recorder
+  / ShareX / Game Bar instructions for capturing the README hero GIF.
+
+### Changed
+- Bumped version to 0.3.0 — feature add (10 skills now, up from 7).
+
+### Notes
+- Initial public release on GitHub at https://github.com/ivala2081/vibe-game
+- Plugin install path validated:
+  ```
+  /plugin marketplace add ivala2081/vibe-game
+  /plugin install vibe-game@vibe-games
+  /vibe-game:vibe-start
+  ```
+
+---
+
 ## [0.2.0] — 2026-05-26
 
 ### Added

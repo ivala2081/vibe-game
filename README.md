@@ -5,7 +5,7 @@
 
 [![Unity](https://img.shields.io/badge/Unity-6000.x_%7C_2022.3_LTS-black?logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://claude.com/claude-code)
-[![Version](https://img.shields.io/badge/Version-0.2.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-0.3.0-blue.svg)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 *Package: `vibe-game`. **Unity-only.** Not affiliated with or endorsed by Unity Technologies.*
@@ -35,8 +35,9 @@ Every other Claude skill for game dev gives you **templates**. None give you **t
 
 It's what you'd get if Vlambeer, Steve Swink, and Jonas Tyroller sat at the next desk while you built your Unity game.
 
-## The 7 Unity skills
+## The 10 Unity skills
 
+### Core (build & ship)
 | Skill | What it does in your Unity project |
 |-------|------------------------------------|
 | `/vibe-start` | 1-page Vibe Brief replaces 50-page GDD. Saved to `Assets/_Project/vibe-brief.md`. |
@@ -46,6 +47,13 @@ It's what you'd get if Vlambeer, Steve Swink, and Jonas Tyroller sat at the next
 | `/cut` | Scope killer. Ruthless. Cites solo-dev failure data for every cut. Quantifies hours saved. |
 | `/grab-asset` | Unity asset pipeline — Kenney, OpenGameArt, Itch CC0 → palette-matched → imported with correct PPU/compression settings → added to `CREDITS.md`. |
 | `/ship` | Unity WebGL build via batch mode → itch.io page draft → launch devlog. One command. |
+
+### Workflow & accountability
+| Skill | What it does |
+|-------|--------------|
+| `/jam-mode` | Game jam workflow with locked scope, auto-checkpoints, CC0-only asset rule, auto-devlog cadence, and hard ship gate at T-2h. |
+| `/devlog` | Generate GMTK-style devlog posts in 3 lengths (Twitter/X, itch.io, blog) with GIF placement guidance. Mood-aware tone. |
+| `/death-watch` | Honest project health diagnostic. Tracks activity, scope drift, playtest gaps. Outputs four paths: PIVOT / SHIP / CUT-AND-CONTINUE / ABANDON. |
 
 ## What makes it different
 
@@ -68,8 +76,8 @@ Unity-ready procedural placeholder pipeline: jsfxr SFX (drop-in .wav), shader te
 ### 5. Scope killer agent
 A dedicated agent whose only job is to say *"cut this"* — citing post-mortems and quantifying hours saved.
 
-### 6. Death-watch (optional, v2)
-After 2 weeks of low Unity Editor activity / no playtest, the skill asks the hard questions most devs avoid.
+### 6. Death-watch built in
+After 2 weeks of low Unity Editor activity / no playtest, `/death-watch` runs honest project triage with four explicit paths: PIVOT / SHIP / CUT-AND-CONTINUE / ABANDON. No flattery, no cheerleading.
 
 ### 7. Hooks that nag at the right time
 Two starter hooks in `hooks/`:
