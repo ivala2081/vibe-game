@@ -18,7 +18,7 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   - `FEEL-CHECK.md` — example `/feel-check` output (Swink 6 metrics + Fun-O-Meter)
   - `BUGS-FIXED.md` — log of bugs surfaced during real Unity test
 - **`marketplace.json`** at `.claude-plugin/marketplace.json` — makes the plugin installable via
-  `/plugin marketplace add Donchitos/vibe-game` then `/plugin install vibe-game@vibe-games`.
+  `/plugin marketplace add ivala2081/vibe-game` then `/plugin install vibe-game@vibe-games`.
 - **`LICENSE`** — MIT, with Unity trademark disclaimer and fair-use note for taste sources.
 - **`hooks/`** directory with two starter hooks:
   - `pre-edit-vibe-brief.sh` — warn if a session edits code without a Vibe Brief present

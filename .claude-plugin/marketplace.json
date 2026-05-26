@@ -3,7 +3,7 @@
   "name": "vibe-games",
   "description": "Indie game-dev plugins for Claude Code. Starting with Vibe Game for Unity.",
   "owner": {
-    "name": "Donchitos"
+    "name": "ivala2081"
   },
   "plugins": [
     {
@@ -13,10 +13,10 @@
       "description": "Ship indie Unity games solo, fast. Encoded design taste from Vlambeer, Steve Swink, Tyroller, GMTK, cited in every skill output.",
       "version": "0.2.3",
       "author": {
-        "name": "Donchitos"
+        "name": "ivala2081"
       },
-      "homepage": "https://github.com/Donchitos/vibe-game",
-      "repository": "https://github.com/Donchitos/vibe-game",
+      "homepage": "https://github.com/ivala2081/vibe-game",
+      "repository": "https://github.com/ivala2081/vibe-game",
       "license": "MIT",
       "category": "development",
       "keywords": ["unity", "game-dev", "indie", "game-feel", "juice", "vibe-coding"],

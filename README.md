@@ -85,7 +85,7 @@ The moat is *cited* taste. The hooks enforce it gently.
 In Claude Code, from your Unity project root:
 
 ```
-/plugin marketplace add Donchitos/vibe-game
+/plugin marketplace add ivala2081/vibe-game
 /plugin install vibe-game@vibe-games
 ```
 
@@ -108,7 +108,7 @@ existing controllers) and adapts its output accordingly.
 If you want to hack on `vibe-game` itself:
 
 ```bash
-git clone https://github.com/Donchitos/vibe-game
+git clone https://github.com/ivala2081/vibe-game
 cd vibe-game
 # In Claude Code:
 /plugin marketplace add ./
