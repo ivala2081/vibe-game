@@ -16,6 +16,7 @@ Every skill in this pack consults the library and **cites the source** when appl
 | [tyroller-mistakes.md](tyroller-mistakes.md) | Project-level survival | `/cut`, `/death-watch`, `/vibe-start` |
 | [gmtk-patterns.md](gmtk-patterns.md) | Structural design patterns | `/prototype`, `/feel-check` |
 | [unity-patterns.md](unity-patterns.md) | Unity-specific HOW-TO (the API layer) | `/prototype`, `/juice` |
+| [claude-code-internals.md](claude-code-internals.md) | Claude Code loader quirks & format reference (CC1–CC11) | `/diagnose`, all plugin authors |
 
 ---
 

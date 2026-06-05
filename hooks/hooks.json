@@ -1,5 +1,15 @@
 {
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/session-start.sh"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
@@ -11,6 +21,12 @@
           {
             "type": "command",
             "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/juice-citation-check.sh"
+          },
+          {
+            "type": "prompt",
+            "if": "Edit(**/skills/**/SKILL.md) OR Write(**/skills/**/SKILL.md)",
+            "prompt": "A SKILL.md file was just edited. Check the YAML frontmatter at the top: does it include both 'name:' and 'description:' fields? Does the description string have proper quoting if it contains parentheses, dashes, or special characters? If anything looks off, respond with a one-line concrete fix suggestion (e.g. 'Quote description: \"...\"'). Otherwise respond with empty string. Tool input: $ARGUMENTS",
+            "timeout": 12
           }
         ]
       }

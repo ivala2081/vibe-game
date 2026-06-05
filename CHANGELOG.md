@@ -7,6 +7,48 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [0.5.0] — 2026-06-05 — "Loader Insight"
+
+### Added
+
+- **`taste/claude-code-internals.md`** — eleven documented Claude Code quirks
+  (`CC1`–`CC11`) covering the loader behavior, cache versioning, frontmatter
+  spec, hook event catalog, manifest field types, and marketplace name
+  reservations. Sourced from official docs + community schema + direct
+  observation of v2.1.150.
+- **`/diagnose` skill** — self-diagnostic for vibe-game install health.
+  Verifies cache freshness, lints SKILL.md frontmatter, validates plugin.json
+  field types, checks hook config, and explains the misleading "0 skills"
+  counter so users don't file false bugs.
+- **README "Known Quirks of Claude Code" section** — surfaces the 0-skills
+  counter mislabel, stale-cache-after-edit, and `agents` field gotcha. Links
+  to the new `claude-code-internals.md` for the full reference.
+- **`hooks/session-start.sh`** — SessionStart hook. Detects Unity projects
+  from cwd, surfaces a one-line welcome with the next recommended skill
+  (`/vibe-start` if no brief, `/prototype` or `/juice` if brief exists).
+- **Prompt-type hook in `hooks.json`** — LLM evaluation on SKILL.md edits.
+  Checks frontmatter for required fields and YAML quoting issues using a fast
+  model. Demonstrates the `prompt` hook type beyond `command`.
+
+### Changed
+- **Skill count: 10 → 11** (`/diagnose` added).
+- **`hooks/hooks.json`** — now includes 3 hook entries across 2 events
+  (SessionStart + PostToolUse), with a mix of `command` and `prompt` types.
+- **`taste/INDEX.md`** — registers `claude-code-internals.md` as the
+  plugin-host knowledge layer (companion to `unity-patterns.md`'s
+  engine layer and the four design-taste layers).
+- **README** — version badge bumped to 0.5.0; `/diagnose` listed in the
+  Workflow & accountability table.
+
+### Notes
+
+The "Loader Insight" theme: vibe-game v0.5.0 stops being a black box for
+debugging. When something looks broken, run `/vibe-game:diagnose` and get a
+cited explanation — not just "try restarting Claude Code." That self-knowledge
+is now a moat feature, not a developer-only debugging tool.
+
+---
+
 ## [0.4.0] — 2026-05-26
 
 ### Added — Unity API layer

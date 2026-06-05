@@ -5,7 +5,7 @@
 
 [![Unity](https://img.shields.io/badge/Unity-6000.x_%7C_2022.3_LTS-black?logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://claude.com/claude-code)
-[![Version](https://img.shields.io/badge/Version-0.4.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-0.5.0-blue.svg)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 *Package: `vibe-game`. **Unity-only.** Not affiliated with or endorsed by Unity Technologies.*
@@ -35,7 +35,7 @@ Every other Claude skill for game dev gives you **templates**. None give you **t
 
 It's what you'd get if Vlambeer, Steve Swink, and Jonas Tyroller sat at the next desk while you built your Unity game.
 
-## The 10 Unity skills
+## The 11 Unity skills
 
 ### Core (build & ship)
 | Skill | What it does in your Unity project |
@@ -54,6 +54,7 @@ It's what you'd get if Vlambeer, Steve Swink, and Jonas Tyroller sat at the next
 | `/jam-mode` | Game jam workflow with locked scope, auto-checkpoints, CC0-only asset rule, auto-devlog cadence, and hard ship gate at T-2h. |
 | `/devlog` | Generate GMTK-style devlog posts in 3 lengths (Twitter/X, itch.io, blog) with GIF placement guidance. Mood-aware tone. |
 | `/death-watch` | Honest project health diagnostic. Tracks activity, scope drift, playtest gaps. Outputs four paths: PIVOT / SHIP / CUT-AND-CONTINUE / ABANDON. |
+| `/diagnose` | Self-diagnostic for the plugin itself. Validates install integrity, explains the Claude Code "0 skills" counter quirk, lints SKILL.md frontmatter, checks cache freshness. Run when something's confusing. |
 
 ## What makes it different
 
@@ -165,6 +166,30 @@ Builds/
 ├── itch-page.md            ← Page draft
 └── devlog-launch.md        ← Launch post
 ```
+
+## Known Quirks of Claude Code (not vibe-game bugs)
+
+These are things you might see in Claude Code v2.x that look like vibe-game problems but aren't. Documented so you don't panic.
+
+### "0 skills" in `/reload-plugins` output
+
+```
+Reloaded: 3 plugins · 0 skills · 10 agents · 2 hooks
+```
+
+This counter is **mislabeled**. It reports the plugin's `command_count` and prints it as "skill", while your actual SKILL.md files are loaded through a separate code path that the counter ignores. **Your skills are loaded.** Verify by running `/vibe-game:vibe-start` — if it executes, you're fine.
+
+Or run `/vibe-game:diagnose` for a full self-check.
+
+### Stale cache after editing source
+
+If you edit a SKILL.md file but Claude Code doesn't pick up the changes, the cache is stale. Bump the `version` in `.claude-plugin/plugin.json` and run `/plugin marketplace update vibe-games` — version change forces a fresh clone.
+
+### `agents` field as directory path
+
+If you ever override the auto-discovery and write `"agents": "./agents"` in plugin.json, Claude Code rejects it (`Invalid input: expected …`). The field requires `.md` file paths, not a directory. Just leave the field out — auto-discovery from `agents/` works.
+
+See [`taste/claude-code-internals.md`](taste/claude-code-internals.md) for the full reference (11 documented quirks with CC1–CC11 IDs).
 
 ## Showcase
 
