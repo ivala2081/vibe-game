@@ -38,6 +38,37 @@ disable-model-invocation: false
    it on a symmetric capsule.*
    Source: [[game-feel-swink#m5--metaphor]] — the action must read as the thing it represents.
 
+## Unity pattern selection (decision tree)
+
+Before generating code, check [[unity-patterns]] and apply when appropriate:
+
+| Detected need | Apply pattern | When |
+|---|---|---|
+| Tunable stats per archetype (weapons, enemies) | **UP1** ScriptableObject Configs | Always when there are >1 weapon/enemy types |
+| Systems that shouldn't reference each other | **UP2** Event Channels | Score updates UI, kills feed a popup, etc. |
+| Spawned objects (bullets, particles, popups) | **UP3** Object Pooling | Any object spawned >5 times per minute |
+| Movement / fade / scale animation | **UP4** Tweening | Use DOTween if available, else coroutine + curve |
+| Camera shake | **UP5** Cinemachine Impulse | Always for impacts |
+| Frame freeze on hit | **UP6** Time.timeScale + unscaledDeltaTime | Always for melee/heavy hits |
+| Per-instance color override | **UP7** MaterialPropertyBlock | Hit flash, damage tint, status effects |
+| Code-only input | **UP9** InputAction in code | Prototype scope — skip PlayerInput component |
+| Save state | **UP11** JsonUtility | Non-jam scope only |
+
+For each generation, **cite the UP# in code comments**:
+```csharp
+// [UP3] pooled bullets to avoid Instantiate/Destroy hitches
+private ObjectPool<Bullet> _pool;
+```
+
+## Templates you can use
+
+Drop-in templates live in `templates/`:
+- `templates/scriptable-objects/WeaponConfig.cs` — example tunable config
+- `templates/scriptable-objects/EnemyConfig.cs` — enemy stats + telegraph
+- `templates/scriptable-objects/IntEventChannel.cs` — decoupled event bus
+- `templates/cinemachine-impulse-setup.md` — Cinemachine 3.0 setup walkthrough
+- `templates/shaders/HitFlash.shader` — URP unlit + _FlashAmount
+
 ## Procedure
 
 ### Step 1 — Read the project

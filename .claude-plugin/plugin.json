@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "vibe-game",
   "displayName": "Vibe Game for Unity",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Ship indie Unity games solo, fast. Encoded design taste from Vlambeer, Steve Swink, Jonas Tyroller, and GMTK, cited in every skill output. Unity-only. Not affiliated with Unity Technologies.",
   "author": {
     "name": "ivala2081"

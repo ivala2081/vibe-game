@@ -11,10 +11,11 @@ Every skill in this pack consults the library and **cites the source** when appl
 
 | File | Domain | When to consult |
 |------|--------|-----------------|
-| [vlambeer-juice.md](vlambeer-juice.md) | Moment-to-moment polish | `/juice`, `/feel-check` |
-| [game-feel-swink.md](game-feel-swink.md) | Input/response theory, the 6 metrics | `/feel-check`, `/prototype` |
+| [vlambeer-juice.md](vlambeer-juice.md) | Moment-to-moment polish (WHAT to do) | `/juice`, `/feel-check` |
+| [game-feel-swink.md](game-feel-swink.md) | Input/response theory, the 6 metrics (WHY it works) | `/feel-check`, `/prototype` |
 | [tyroller-mistakes.md](tyroller-mistakes.md) | Project-level survival | `/cut`, `/death-watch`, `/vibe-start` |
 | [gmtk-patterns.md](gmtk-patterns.md) | Structural design patterns | `/prototype`, `/feel-check` |
+| [unity-patterns.md](unity-patterns.md) | Unity-specific HOW-TO (the API layer) | `/prototype`, `/juice` |
 
 ---
 
@@ -24,6 +25,7 @@ Skills must cite the source when applying a rule:
 
 > ✓ Added 60ms hit-stop on melee impact ([Vlambeer P4](vlambeer-juice.md#p4--hit-stop-frame-freeze-on-impact))
 > ✓ Camera kick on dash ([Vlambeer P10](vlambeer-juice.md#p10--camera-kick))
+> ✓ Cinemachine Impulse Source on player (Unity Pattern [UP5](unity-patterns.md#up5--cinemachine-30-impulse-for-camera-shake))
 > ⚠ Telegraph time only 100ms — recommend 200ms+ ([GMTK Telegraph everything](gmtk-patterns.md#telegraph-everything))
 > ⚠ Inventory crafting may be scope creep ([Tyroller M11](tyroller-mistakes.md#m11--perfectionism-on-side-systems))
 

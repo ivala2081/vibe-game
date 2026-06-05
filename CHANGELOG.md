@@ -7,6 +7,46 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [0.4.0] — 2026-05-26
+
+### Added — Unity API layer
+
+A new taste-library file plus four drop-in templates close the "how do I actually do this in Unity?" gap that the design-taste files (Vlambeer, Swink, Tyroller, GMTK) leave open.
+
+- **`taste/unity-patterns.md`** — 15 numbered Unity-specific patterns (`UP1`–`UP15`):
+  - UP1 ScriptableObject configs
+  - UP2 ScriptableObject event channels (Ryan Hipple)
+  - UP3 Object pooling via `ObjectPool<T>`
+  - UP4 Tweening (DOTween or coroutine + curve)
+  - UP5 Cinemachine 3.0 Impulse (with magnitude table)
+  - UP6 `Time.timeScale` hit-stop with `unscaledDeltaTime` discipline
+  - UP7 MaterialPropertyBlock for hit flash (no draw-call cost)
+  - UP8 Animator parameter hashing
+  - UP9 InputAction in code (prototype scope)
+  - UP10 Audio mixer with sidechain ducking
+  - UP11 JsonUtility save/load
+  - UP12 Coroutine vs async/UniTask
+  - UP13 URP HitFlash shader
+  - UP14 Build profiles + scene management
+  - UP15 OnValidate editor-time guards
+- **`templates/scriptable-objects/`** — 3 ready-to-use `.cs` templates:
+  - `WeaponConfig.cs`
+  - `EnemyConfig.cs`
+  - `IntEventChannel.cs`
+- **`templates/cinemachine-impulse-setup.md`** — 5-minute Cinemachine 3.0 walkthrough with magnitude table (force values per event type, mood multipliers).
+- **`templates/shaders/HitFlash.shader`** — URP Unlit + `_FlashAmount` shader driven via MaterialPropertyBlock.
+
+### Changed
+- **`/prototype` SKILL.md** — added Unity Pattern decision tree, citing UP1–UP15 by ID. Lists templates available for drop-in use.
+- **`/juice` SKILL.md** — added concrete implementations for camera shake (Cinemachine Impulse), hit-stop (static helper), hit flash (MPB or shader), tweening (DOTween or coroutine), audio ducking. Added mood-multiplier constants.
+- **`taste/INDEX.md`** — added `unity-patterns.md` to the file table with a new "Unity-specific HOW-TO" domain.
+
+### Notes
+- The Unity API layer is **knowledge**, not bundled Unity packages. Templates are reference `.cs` and `.shader` files Claude reads and adapts to the user's project, not files that ship into `Packages/`.
+- Citations in generated code now look like: `// [UP3] pooled bullets to avoid Instantiate/Destroy hitches`.
+
+---
+
 ## [0.3.0] — 2026-05-26
 
 ### Added

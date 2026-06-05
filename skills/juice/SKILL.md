@@ -31,6 +31,60 @@ disable-model-invocation: false
    M2 (response). FEEL-CHECK predicted this before testing; real tester confirmed it.*
    Source: [[game-feel-swink#m2--response]], [[vlambeer-juice#p25--one-frame-ui-tween-in]].
 
+## Unity-specific implementation (concrete)
+
+Always prefer these implementations over hand-rolled equivalents:
+
+### Camera shake → Cinemachine Impulse [UP5]
+Setup walkthrough: `templates/cinemachine-impulse-setup.md`. Magnitudes follow [[vlambeer-juice#p3]] table.
+
+```csharp
+[SerializeField] CinemachineImpulseSource impulse;
+impulse.GenerateImpulseWithForce(0.4f * MOOD_MULT);  // melee landed
+```
+
+### Hit-stop → static helper [UP6]
+```csharp
+public static class HitStop {
+    static float _until;
+    public static void Freeze(float s) {
+        _until = Mathf.Max(_until, Time.realtimeSinceStartup + s);
+        Time.timeScale = 0f;
+    }
+    public static void Tick() {
+        if (Time.timeScale == 0f && Time.realtimeSinceStartup >= _until)
+            Time.timeScale = 1f;
+    }
+}
+```
+**Mandatory:** any coroutine/animation/audio that runs during hit-stop uses `Time.unscaledDeltaTime`, `WaitForSecondsRealtime`, or `AudioSource.ignoreListenerPause = true`.
+
+### Hit flash → MaterialPropertyBlock OR HitFlash shader [UP7, UP13]
+**Default:** MaterialPropertyBlock with `_BaseColor` + `_Color` set. **If** you need full-surface override (silhouette flash), use `templates/shaders/HitFlash.shader` and drive `_FlashAmount` from 0→1→0 over 70ms.
+
+### Tweening → DOTween or coroutine + AnimationCurve [UP4]
+```csharp
+// DOTween (recommended):
+transform.DOScale(1.2f, 0.18f).SetEase(Ease.OutBack);
+canvasGroup.DOFade(0f, 0.35f).SetEase(Ease.InQuad);
+
+// No-DOTween fallback:
+yield return TweenScale(0.18f, AnimationCurve.EaseInOut(0,0,1,1));
+```
+
+### Audio mixer with ducking [UP10]
+2 mixer groups (Music, SFX) → Music group → Duck Volume effect → sidechain SFX. Threshold -20dB, Ratio 4:1, Attack 50ms, Release 800ms. Combat music dips automatically during impact-heavy moments.
+
+### Mood profile multipliers
+Apply to all magnitudes when generating code:
+```csharp
+const float MOOD_MULT_TENSE_METHODICAL = 0.6f;
+const float MOOD_MULT_FRENETIC = 1.5f;
+const float MOOD_MULT_MELANCHOLIC = 0.4f;
+const float MOOD_MULT_PLAYFUL = 1.0f;
+```
+Read brief mood, pick multiplier, apply to every Impulse force, hit-stop duration, particle count.
+
 ## The juice checklist
 
 Walk through each in order. For each, decide APPLY or SKIP (with reason).

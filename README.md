@@ -5,7 +5,7 @@
 
 [![Unity](https://img.shields.io/badge/Unity-6000.x_%7C_2022.3_LTS-black?logo=unity)](https://unity.com)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-orange)](https://claude.com/claude-code)
-[![Version](https://img.shields.io/badge/Version-0.3.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-0.4.0-blue.svg)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 *Package: `vibe-game`. **Unity-only.** Not affiliated with or endorsed by Unity Technologies.*
